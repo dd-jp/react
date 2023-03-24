@@ -1,12 +1,20 @@
-import { checkAccessibility, customRender } from '@test-utils'
+import {
+  checkAccessibility,
+  customRender,
+  type IExtendedRenderOptions,
+} from '@test-utils'
 import App from '../App'
 
+const renderOptions: IExtendedRenderOptions = {
+  withRouter: true,
+  routerHistory: [':test'],
+}
+
 describe('App', () => {
-  checkAccessibility(<App />)
+  checkAccessibility(<App />, renderOptions)
 
   test('Renders main page correctly', () => {
-    const { getByText } = customRender(<App />)
-    expect(getByText(/Header/i)).toBeInTheDocument()
-    expect(getByText(/Hello World!/i)).toBeInTheDocument()
+    const { getAllByText } = customRender(<App />, renderOptions)
+    expect(getAllByText(/Home/i)).toHaveLength(2)
   })
 })

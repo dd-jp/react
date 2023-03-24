@@ -1,12 +1,22 @@
 import { type RouteObject } from 'react-router-dom'
+import { Home } from '../components/home'
+import { Test } from '../components/test'
 
-export const ROUTES: RouteObject[] = [
+interface CustomRouteObject {
+  title: string
+}
+
+type TRouteObject = RouteObject & CustomRouteObject
+
+export const ROUTES: TRouteObject[] = [
   {
     path: '/',
-    element: <div>Hello world!</div>,
+    title: 'Home',
+    element: <Home />,
   },
   {
     path: '/test',
-    element: <div>Test</div>,
+    title: 'Test',
+    element: <Test />,
   },
 ]

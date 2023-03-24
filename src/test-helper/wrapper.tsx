@@ -4,14 +4,18 @@ import {
   type RenderResult,
   type RenderOptions,
 } from '@testing-library/react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { MemoryRouter as Router } from 'react-router-dom'
 
 interface IExtendedRenderOptions extends RenderOptions {
   withRouter?: boolean
+  routerHistory?: string[]
 }
 
-const wrapInRouter = (componentTree: JSX.Element): JSX.Element => (
-  <Router>{componentTree}</Router>
+const wrapInRouter = (
+  componentTree: JSX.Element,
+  routerHistory?: string[]
+): JSX.Element => (
+  <Router initialEntries={routerHistory}>{componentTree}</Router>
 )
 
 const setupComponent = (
